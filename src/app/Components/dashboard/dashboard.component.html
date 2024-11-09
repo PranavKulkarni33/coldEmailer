@@ -2,7 +2,6 @@
     <div class="email-table-wrapper">
         <div class="email-card">
             <div class="email-card-body">
-
                 <div class="header-with-filter">
                     <button (click)="openFilterModal()" class="filter-button">Filters</button>
                     <h5 class="title">Email Campaign Database</h5>
@@ -37,13 +36,13 @@
                             <td>{{ email.jobTitle }}</td>
                             <td>{{ email.status }}</td>
                             <td>
-                                <button class="edit-button" (click)="editEmail(email)">Edit</button>
-                                <button class="delete-button" (click)="deleteEmail(email)">Delete</button>
+                                <button class="send-button" (click)="sendEmail(email)">Send Email</button>
+                                <button class="edit-button" (click)="openEditEmailModal(email)">Edit</button>
+                                <button class="delete-button" (click)="deleteEmailEntry(email)">Delete</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
@@ -53,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ isEditMode ? 'Edit' : 'Add' }} Email Entry</h5>
-                <button type="button" class="close" (click)="closeAddEmailModal()">&times;</button>
+                <button type="button" class="close" (click)="closeEmailModal()">&times;</button>
             </div>
             <div class="modal-body">
                 <form>
