@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailEntry } from 'src/app/Interfaces/email-entry';
+import { AuthService } from 'src/app/Services/auth.service';
 import { DatabaseService } from 'src/app/Services/database.service';
 
 @Component({
@@ -18,11 +19,20 @@ export class DashboardComponent implements OnInit {
   showStatusFilterModal = false;
   isEditMode = false;
   appliedFilter: { type: string, value?: any } | null = null;
+  userEmail: string | null = null;
 
-  constructor(private emailService: DatabaseService) {}
+  constructor(private emailService: DatabaseService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getAllEmails();
+    this.authService.getCurrentUser().subscribe(user => {
+      if (user) {
+        this.userEmail = user.email; // User is logged in, retrieve email
+        console.log('Logged-in user email:', this.userEmail);
+      } else {
+        console.log('No user logged in or still fetching data.');
+      }
+    });
   }
 
   getAllEmails() {
