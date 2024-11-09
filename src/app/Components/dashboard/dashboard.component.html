@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="email-table-wrapper">
+        <div class="email-card">
+            <div class="email-card-body">
+
+                <div class="header-with-filter">
+                    <button (click)="openFilterModal()" class="filter-button">Filters</button>
+                    <h5 class="title">Email Campaign Database</h5>
+                    <button (click)="openAddEmailModal()" class="addEmail-button">Add Email</button>
+                </div>
+
+                <!-- Display applied filter and make it editable -->
+                <div *ngIf="appliedFilter" class="applied-filter-container">
+                    <div *ngIf="appliedFilter.type === 'status'" class="applied-filter">
+                        <label for="statusFilter">Selected Status:</label>
+                        <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-input1" (change)="applyStatusFilter()">
+                            <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Email Table -->
+                <table class="email-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Job Title</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let email of filteredEmailList">
+                            <td>{{ email.email }}</td>
+                            <td>{{ email.company }}</td>
+                            <td>{{ email.jobTitle }}</td>
+                            <td>{{ email.status }}</td>
+                            <td>
+                                <button class="edit-button" (click)="editEmail(email)">Edit</button>
+                                <button class="delete-button" (click)="deleteEmail(email)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Email Modal -->
+    <div id="addEmailModal" class="modal" [ngClass]="{'show': showAddEmailModal}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ isEditMode ? 'Edit' : 'Add' }} Email Entry</h5>
+                <button type="button" class="close" (click)="closeAddEmailModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" [(ngModel)]="emailObj.email" name="email" required class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" [(ngModel)]="emailObj.company" name="company" required class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" id="jobTitle" [(ngModel)]="emailObj.jobTitle" name="jobTitle" required class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" [(ngModel)]="emailObj.status" name="status" class="form-input">
+                            <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
+                        </select>
+                    </div>
+                    <button type="button" (click)="saveEmail()" class="add-button">{{ isEditMode ? 'Update' : 'Add' }} Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal" [ngClass]="{'show': showFilterModal}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filters</h5>
+                <button type="button" class="close" (click)="closeFilterModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button class="filter-option-button" (click)="openStatusFilterModal()">Filter by Status</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Filter Modal -->
+    <div id="statusFilterModal" class="modal" [ngClass]="{'show': showStatusFilterModal}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter by Status</h5>
+                <button type="button" class="close" (click)="closeStatusFilterModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="statusFilter">Select Status:</label>
+                <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-input1" (change)="applyStatusFilter()">
+                    <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
