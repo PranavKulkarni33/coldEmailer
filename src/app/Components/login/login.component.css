@@ -1,0 +1,5 @@
+.bg-login{
+    background-image: url("../../../assets/bg-login.jpg");
+    background-size: cover;
+    background-position: center;
+  }

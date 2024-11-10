@@ -1,9 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
 body{
-  background-image: url("assets/bg.jpg");
-  background-size: cover;
-  background-position: center;
+  overflow-y: hidden;
+}
+
+.cold {
+  font-family: "Ephesis", cursive;
+  font-weight: 800;   
+  font-size: 4rem;
+  font-style: normal;
+  /* color: #6085B9; */
+  color: #f1f1f1;
+  text-shadow:3px  4px 0 #253B6B;
+}
+@media (max-width: 991.98px) {
+  .cold {
+    font-size: 3rem; 
+  } 
 }
 
 /* =============== LOGIN-SIGNUP =============== */
@@ -24,7 +37,9 @@ body{
   
   @media (max-width: 991.98px) {
     .half .bg {
-      height: 200px; } }
+      height: 0px; 
+    } 
+  }
 
   
   .half .contents, .half .bg {
@@ -55,22 +70,23 @@ body{
   .half a {
     color: #706f6f;
     text-decoration: none !important;
+    transition: 0.5s;
  }
 .half a:hover{
-    color: #213c22;
+    color: #253B6B;
 }
   
 .half .btn {
     height: 54px;
     padding:0 30px;
-    background-color: #523b35;
+    background-color: #6085B9;
     border-radius: 20px;
-    border: 2px solid #523b35;
-    transition: 0.3s;
+    border: 2px solid #6085B9;
+    transition: 0.5s;
 }
 
 .half .btn:hover{
-    background-color: #213c22;
+    background-color: #253B6B;
     color: #f1f1f1;
 }
 

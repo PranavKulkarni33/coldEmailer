@@ -25,7 +25,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     FormsModule
     
   ],
-  providers: [EmailService],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
