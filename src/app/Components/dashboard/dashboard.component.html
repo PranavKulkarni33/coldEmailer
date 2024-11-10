@@ -2,48 +2,73 @@
     <div class="email-table-wrapper">
         <div class="email-card">
             <div class="email-card-body">
-                <div class="header-with-filter">
-                    <button (click)="openFilterModal()" class="filter-button">Filters</button>
-                    <button (click)="logout()" class="filter-button">Log Out</button>
-                    <h5 class="title">Email Campaign Database</h5>
-                    <button (click)="openAddEmailModal()" class="addEmail-button">Add Email</button>
+                <div class="container text-center">
+                    <h5 class="cold">Not So Cold </h5>
+                    <h5 class="title">Prospetive Employer Database</h5>
+                </div>
+                <div class="header-with-action">
+                    <button (click)="openFilterModal()" class="btn-button filter-button">Filters</button>
+                    <button (click)="openAddEmailModal()" class="btn-button addEmail-button">Add New Prospect </button>
+                    <button (click)="logout()" class="btn-button logout-button">Log Out</button>
                 </div>
 
                 <!-- Display applied filter and make it editable -->
                 <div *ngIf="appliedFilter" class="applied-filter-container">
-                    <div *ngIf="appliedFilter.type === 'status'" class="applied-filter">
+                    <div *ngIf="appliedFilter.type === 'status'" class="applied-filter mb-3">
                         <label for="statusFilter">Selected Status:</label>
-                        <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-input1" (change)="applyStatusFilter()">
+                        <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-select" (change)="applyStatusFilter()">
                             <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Email Table -->
-                <table class="email-table">
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>Company</th>
-                            <th>Job Title</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let email of filteredEmailList">
-                            <td>{{ email.email }}</td>
-                            <td>{{ email.company }}</td>
-                            <td>{{ email.jobTitle }}</td>
-                            <td>{{ email.status }}</td>
-                            <td>
-                                <button class="send-button" (click)="sendEmail(email)">Send Email</button>
-                                <button class="edit-button" (click)="openEditEmailModal(email)">Edit</button>
-                                <button class="delete-button" (click)="deleteEmailEntry(email)">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                 <div class="container">
+                    <ul class="responsive-table p-0">
+                        <li class="table-header">
+                                <div class="col col-3">Email</div>
+                                <div class="col col-1">Company</div>
+                                <div class="col col-1">Job Title</div>
+                                <div class="col col-1">Status</div>
+                                <div class="col col-4">Actions</div>
+                        </li>
+                        <li class="table-row" *ngFor="let email of filteredEmailList">
+                            <div class="col col-3">{{ email.email }}</div>
+                            <div class="col col-1"><b>{{ email.company }}</b></div>
+                            <div class="col col-1">{{ email.jobTitle }}</div>
+                            <div class="col col-1">{{ email.status }}</div>
+                            <div class="col col-4">
+                                <button class="send-button" (click)="sendEmail(email)">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/nqisoomz.json"
+                                        trigger="hover"
+                                        colors="primary:#001f3d,secondary:#f4c89c,tertiary:#e87a00,quaternary:#001f3d"
+                                        style="width:40px;height:40px">
+                                    </lord-icon>
+                                </button>
+                                <button class="edit-button" (click)="openEditEmailModal(email)">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/lsrcesku.json"
+                                        trigger="hover"
+                                        colors="primary:#001f3d,secondary:#001f3d,tertiary:#e8b730,quaternary:#f4c89c"
+                                        style="width:40px;height:40px">
+                                    </lord-icon>
+                                </button>
+                                <button class="delete-button" (click)="deleteEmailEntry(email)">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/xekbkxul.json"
+                                        trigger="hover"
+                                        colors="primary:#001f3d,secondary:#848484,tertiary:#646e78,quaternary:#f4c89c"
+                                        style="width:40px;height:40px">
+                                    </lord-icon>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                 </div>
+
+
+               
             </div>
         </div>
     </div>
@@ -59,19 +84,19 @@
                 <form>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" [(ngModel)]="emailObj.email" name="email" required class="form-input" />
+                        <input type="email" id="email" [(ngModel)]="emailObj.email" name="email" required class="form-control mb-2" />
                     </div>
                     <div class="form-group">
                         <label for="company">Company</label>
-                        <input type="text" id="company" [(ngModel)]="emailObj.company" name="company" required class="form-input" />
+                        <input type="text" id="company" [(ngModel)]="emailObj.company" name="company" required class="form-control mb-2" />
                     </div>
                     <div class="form-group">
                         <label for="jobTitle">Job Title</label>
-                        <input type="text" id="jobTitle" [(ngModel)]="emailObj.jobTitle" name="jobTitle" required class="form-input" />
+                        <input type="text" id="jobTitle" [(ngModel)]="emailObj.jobTitle" name="jobTitle" required class="form-control mb-2" />
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select id="status" [(ngModel)]="emailObj.status" name="status" class="form-input">
+                        <select id="status" [(ngModel)]="emailObj.status" name="status" class="form-control mb-3">
                             <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
                         </select>
                     </div>
@@ -89,7 +114,7 @@
                 <button type="button" class="close" (click)="closeFilterModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <button class="filter-option-button" (click)="openStatusFilterModal()">Filter by Status</button>
+                <button class="add-button" (click)="openStatusFilterModal()">Filter by Status</button>
             </div>
         </div>
     </div>
@@ -103,7 +128,7 @@
             </div>
             <div class="modal-body">
                 <label for="statusFilter">Select Status:</label>
-                <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-input1" (change)="applyStatusFilter()">
+                <select id="statusFilter" [(ngModel)]="selectedFilterStatus" class="form-select" (change)="applyStatusFilter()">
                     <option *ngFor="let status of emailStatuses" [value]="status">{{ status | titlecase }}</option>
                 </select>
             </div>

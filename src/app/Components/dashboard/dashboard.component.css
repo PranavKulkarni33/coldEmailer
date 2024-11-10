@@ -1,11 +1,4 @@
 /* Main container styling */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    background-color: transparent;
-  }
   
   .email-table-wrapper {
     width: 100%;
@@ -15,11 +8,11 @@
   }
   
   .email-card {
-    background-color: #716865;
+    background-color: #aabbd2;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: white;
+    /* color: white; */
     width: 100%;
   }
   
@@ -43,9 +36,8 @@
     width: 100%;
     padding: 0.5rem 1rem;
   }
-  
-  .addEmail-button {
-    background-color: #007bff;
+
+  .btn-button{
     color: white;
     padding: 0.75rem;
     border: none;
@@ -54,33 +46,83 @@
     transition: background-color 0.3s ease;
   }
   
+  .addEmail-button {
+    background-color: #E87A00;
+  }
   .addEmail-button:hover {
-    background-color: #0056b3;
+    background-color: #A25D10;
+  }
+
+  .logout-button{
+    background-color: #007bff;
+  }
+  .logout-button:hover{
+    background-color: #0056b3 ;
+  }
+
+  .filter-button{
+    background-color: #253B6B;
+  }
+  .filter-button:hover{
+    background-color: #16284d;
   }
   
   /* Email table styling */
-  .email-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
   
-  .email-table th,
-  .email-table td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #c9c9c9;
-    color: #393433;
-  }
   
-  .email-table th {
-    background-color: #AB9F9D;
-    font-weight: 600;
-    border-bottom: 2px solid #393433;
+  .responsive-table li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
   }
-  
-  .email-table td {
-    background-color: #f1f1f1;
+
+  .responsive-table .table-header {
+    background-color: #253b6bc8;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #f1f1f1;
+    font-weight: 600
+  }
+  .responsive-table .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  }
+  .responsive-table .col-1 {
+    flex-basis: 10%;
+  }
+  .responsive-table .col-2 {
+    flex-basis: 40%;
+  }
+  .responsive-table .col-3 {
+    flex-basis: 25%;
+  }
+  .responsive-table .col-4 {
+    flex-basis: 20%;
+  }
+  @media all and (max-width: 767px) {
+    .responsive-table .table-header {
+      display: none;
+    }
+    .responsive-table li {
+      display: block;
+    }
+    .responsive-table .col {
+      flex-basis: 100%;
+    }
+    .responsive-table .col {
+      display: flex;
+      padding: 10px 0;
+    }
+    .responsive-table .col:before {
+      color: #6C7A89;
+      padding-right: 10px;
+      content: attr(data-label);
+      flex-basis: 50%;
+      text-align: right;
+    }
   }
   
   /* Modal styles */
@@ -91,12 +133,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background-color: white;
+    background-color: #d8e1ee;
     padding: 20px;
     border-radius: 8px;
-    width: 80%;
+    /* width: 80%; */
+    height: fit-content;
     max-width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-content{
+    background-color: #ffff;
   }
   
   .modal.show {
@@ -121,20 +168,6 @@
     cursor: pointer;
   }
   
-  /* Form group styling */
-  .form-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-  }
-  
   .add-button {
     background-color: #28a745;
     color: white;
@@ -153,32 +186,10 @@
   .edit-button,
   .send-button,
   .delete-button {
-    background-color: #007bff;
-    color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0 5px;
-  }
-  
-  .edit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-
-  .send-button{
-    background-color: #358103;
-  }
-
-  .send-button:hover{
-    background-color: #66f407;
+    margin: 2px 5px;
   }
   
