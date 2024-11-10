@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat'
 import { AppRoutingModule } from './app-routing.module';
@@ -25,8 +25,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     FormsModule
     
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [EmailService],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
 export class AppModule {
  }

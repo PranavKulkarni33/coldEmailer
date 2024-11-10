@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{
+  background-image: url("assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* =============== LOGIN-SIGNUP =============== */
+
+.logo{
+    justify-content: center;
+}
+.login-logo{
+    width: 150px;
+}
+
+.content {
+    padding: 7rem 0; }
+  
+  .half, .half .container > .row {
+    height: 100vh;
+    min-height: 700px; }
+  
+  @media (max-width: 991.98px) {
+    .half .bg {
+      height: 200px; } }
+
+  
+  .half .contents, .half .bg {
+    width: 50%; }
+    @media (max-width: 1199.98px) {
+      .half .contents, .half .bg {
+        width: 100%; } }
+    .half .contents .form-control, .half .bg .form-control {
+      border: none;
+      -webkit-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      height: 54px;
+      background: #f1f1f1; 
+      transition: 0.3s;
+    }
+      .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
+        outline: none;
+        -webkit-box-shadow: 20px 20px 10px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 20px 20px 10px 0 rgba(0, 0, 0, 0.1);
+        border: 2px solid #523b35ac;
+     }
+  
+  .half .bg {
+    background-size: cover;
+    background-position: center; }
+  
+  .half a {
+    color: #706f6f;
+    text-decoration: none !important;
+ }
+.half a:hover{
+    color: #213c22;
+}
+  
+.half .btn {
+    height: 54px;
+    padding:0 30px;
+    background-color: #523b35;
+    border-radius: 20px;
+    border: 2px solid #523b35;
+    transition: 0.3s;
+}
+
+.half .btn:hover{
+    background-color: #213c22;
+    color: #f1f1f1;
+}
+
+  
+  .half .forgot-pass {
+    position: relative;
+    top: 2px;
+    font-size: 14px; 
+}
+  
