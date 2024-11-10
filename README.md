@@ -1,27 +1,51 @@
-# ColdEmailer
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
+</head>
+<body>
 
-## Development server
+<h1>Not so Cold</h1>
+<p><strong>Not so Cold</strong> is a job application follow-up tool designed to automate cold emails to potential employers. By managing follow-up emails and ensuring consistency in your job search outreach, <strong>Not so Cold</strong> helps job seekers keep their applications top-of-mind.</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<h2>Features</h2>
+<ul>
+  <li><strong>Automated Follow-Up Emails</strong>: Sends scheduled follow-up emails to employers to maintain communication.</li>
+  <li><strong>Centralized Email Management</strong>: Keep track of employers, job titles, application status, and more.</li>
+  <li><strong>User Authentication</strong>: Secure access with Firebase Authentication.</li>
+  <li><strong>Customizable Email Schedules</strong>: Set the frequency and timing of follow-ups.</li>
+  <li><strong>Integrated Subscription Model</strong>: Pay-as-you-go model via Stripe for premium features.</li>
+</ul>
 
-## Code scaffolding
+<h2>Tech Stack</h2>
+<ul>
+  <li><strong>Frontend</strong>: Angular</li>
+  <li><strong>Backend</strong>: Firebase (Firestore, Cloud Functions, Authentication)</li>
+  <li><strong>Database</strong>: Firestore</li>
+  <li><strong>Email Sending</strong>: Google Gmail API for sending emails</li>
+</ul>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<h2>Prerequisites</h2>
+<ul>
+  <li><a href="https://nodejs.org/">Node.js</a> and npm</li>
+  <li><a href="https://angular.io/cli">Angular CLI</a></li>
+  <li><a href="https://firebase.google.com/docs/cli">Firebase CLI</a></li>
+</ul>
 
-## Build
+<h2>Getting Started</h2>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<h3>1. Clone the repository</h3>
+<pre><code>git clone https://github.com/your-username/not-so-cold.git
+cd not-so-cold
+</code></pre>
 
-## Running unit tests
+<h3>2. Install dependencies</h3>
+<pre><code>npm install</code></pre>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<h3>3. Firebase Setup</h3>
+<ol>
+  <li>Go to the <a href="https://console.firebase.google.com/">Firebase Console</a> and create a new project.</li>
+  <li>Enable <strong>Firestore</strong>, <strong>Authentication</strong>, and <strong>Cloud Functions</strong>.</li>
+ 
