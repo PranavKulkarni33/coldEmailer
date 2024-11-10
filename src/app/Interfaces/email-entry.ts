@@ -1,5 +1,6 @@
 export interface EmailEntry {
     id: string; // Firestore document ID
+    userId: string //User id
     email: string; // Email address of the contact
     company: string; // Company name
     jobTitle: string; // Job title of the contact
@@ -7,4 +8,5 @@ export interface EmailEntry {
     lastContacted?: string; // Date of the last contact
     notes?: string; // Additional notes about the contact
     editing?: boolean; // For toggling edit mode in UI
+    lastFollowUp?: any; // Last Follow up
 }

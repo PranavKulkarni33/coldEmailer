@@ -151,6 +151,7 @@
   
   /* Action buttons */
   .edit-button,
+  .send-button,
   .delete-button {
     background-color: #007bff;
     color: white;
@@ -171,5 +172,13 @@
   
   .delete-button:hover {
     background-color: #c82333;
+  }
+
+  .send-button{
+    background-color: #358103;
+  }
+
+  .send-button:hover{
+    background-color: #66f407;
   }
   
