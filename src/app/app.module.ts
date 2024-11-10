@@ -9,6 +9,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EmailService } from './Services/email.service';
 
 @NgModule({
   declarations: [
@@ -22,12 +24,15 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, 
-    FormsModule
+    FormsModule,
+    HttpClientModule
     
   ],
+
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
+
 })
 export class AppModule {
  }
