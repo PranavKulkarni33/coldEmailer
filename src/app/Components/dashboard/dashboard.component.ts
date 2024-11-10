@@ -13,7 +13,7 @@ import { EmailService } from 'src/app/Services/email.service';
 export class DashboardComponent implements OnInit {
   emailList: EmailEntry[] = [];
   filteredEmailList: EmailEntry[] = [];
-  emailObj: EmailEntry = { id: '', email: '', company: '', jobTitle: '', status: 'pending' };
+  emailObj: EmailEntry = { id: '', email: '', company: '', jobTitle: '', status: 'pending', userId: '' };
   emailStatuses: string[] = ['pending', 'sent', 'replied', 'archived'];
   selectedFilterStatus: string = 'all';
   showAddEmailModal = false;
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserEmail();
-    this.loadEmails();
+    this.loadUserEmails();
     this.processOAuthRedirect();
   }
 
@@ -59,7 +59,6 @@ export class DashboardComponent implements OnInit {
         const accessToken = params.get('access_token');
         if (accessToken) {
           this.authService.saveUserAccessToken(accessToken);
-          console.log('Access Token:', accessToken);
         }
       }
     });
@@ -72,14 +71,14 @@ export class DashboardComponent implements OnInit {
     window.location.href = oauthUrl;
   }
 
-  // Fetch all emails from the database
-  private loadEmails(): void {
+  // Load emails for the logged-in user
+  loadUserEmails(): void {
     this.databaseService.getAllEmails().subscribe(
-      res => {
-        this.emailList = res;
+      emails => {
+        this.emailList = emails;
         this.filteredEmailList = [...this.emailList];
       },
-      err => console.error('Error fetching emails:', err)
+      error => console.error('Error fetching emails:', error)
     );
   }
 
@@ -104,21 +103,27 @@ export class DashboardComponent implements OnInit {
   }
 
   // Save a new or updated email entry
-  saveEmail(): void {
-    if (this.isEditMode) {
-      this.databaseService.updateEmail(this.emailObj).then(() => {
-        this.closeEmailModal();
-      }).catch(error => {
-        console.error('Error updating email:', error);
-      });
-    } else {
-      this.databaseService.addEmail(this.emailObj).then(() => {
-        this.closeEmailModal();
-      }).catch(error => {
-        console.error('Error adding email:', error);
-      });
-    }
+  // Inside DashboardComponent
+saveEmail(): void {
+  if (this.isEditMode) {
+    // If editing, don't change the lastFollowUp timestamp
+    this.databaseService.updateEmail(this.emailObj).then(() => {
+      this.closeEmailModal();
+    }).catch(error => {
+      console.error('Error updating email:', error);
+    });
+  } else {
+    // Set lastFollowUp to the current timestamp when adding a new email
+    this.emailObj.lastFollowUp = new Date(); // Initializes the lastFollowUp timestamp
+    this.databaseService.addEmail(this.emailObj).then(() => {
+      this.closeEmailModal();
+    }).catch(error => {
+      console.error('Error adding email:', error);
+    });
   }
+}
+
+  
 
   // Delete an email entry
   deleteEmailEntry(email: EmailEntry): void {
@@ -130,28 +135,30 @@ export class DashboardComponent implements OnInit {
   }
 
   // Send an email using the EmailService
-sendEmail(email: EmailEntry): void {
-  const accessToken = this.authService.getUserAccessToken();
-  if (accessToken) {
-    const { email: recipientEmail, company, jobTitle } = email;
-
-    // Compose the email subject and body
-    const subject = `Job Opportunity at ${company}`;
-    const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\n${this.userEmail}`;
-
-    // Send the email
-    this.emailService.sendEmail(accessToken, this.userEmail!, recipientEmail, subject, body).then(() => {
-      console.log(`Email sent to ${recipientEmail}`);
-      email.status = 'sent'; // Update the status to sent
-      this.databaseService.updateEmail(email); // Update in database
-    }).catch(error => {
-      console.error('Error sending email:', error);
+  sendEmail(email: EmailEntry): void {
+    this.authService.getUserAccessToken().subscribe(accessToken => {
+      if (accessToken) {
+        const { email: recipientEmail, company, jobTitle } = email;
+  
+        // Compose the email subject and body
+        const subject = `Job Opportunity at ${company}`;
+        const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\n${this.userEmail}`;
+  
+        // Send the email
+        this.emailService.sendEmail(accessToken, this.userEmail!, recipientEmail, subject, body).then(() => {
+          console.log(`Email sent to ${recipientEmail}`);
+          email.status = 'sent'; // Update the status to sent
+          this.databaseService.updateEmail(email); // Update in database
+        }).catch(error => {
+          console.error('Error sending email:', error);
+        });
+      } else {
+        console.error('No access token found, please authenticate.');
+        this.startOAuthFlow(); // Initiates OAuth flow if no token is available
+      }
     });
-  } else {
-    console.error('No access token found, please authenticate.');
-    this.startOAuthFlow(); // Initiates OAuth flow if no token is available
   }
-}
+  
 
   
   
@@ -188,6 +195,10 @@ sendEmail(email: EmailEntry): void {
 
   // Reset the email form
   private resetForm(): void {
-    this.emailObj = { id: '', email: '', company: '', jobTitle: '', status: 'pending' };
+    this.emailObj = { id: '', email: '', company: '', jobTitle: '', status: 'pending' , userId: ''};
+  }
+
+  logout(): void{
+    this.authService.logout();
   }
 }
