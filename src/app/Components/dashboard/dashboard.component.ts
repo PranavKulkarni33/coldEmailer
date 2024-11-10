@@ -156,12 +156,14 @@ saveEmail(): void {
         const { email: recipientEmail, company, jobTitle } = email;
   
         const subject = `Job Opportunity at ${company}`;
-        const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\n${this.userName || 'Your Name'}`;
+        const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\nEmail :${this.userEmail}`;
   
         this.emailService.sendEmail(accessToken, this.userEmail!, recipientEmail, subject, body).then(() => {
           console.log(`Email sent to ${recipientEmail}`);
+
           email.status = 'sent';
           this.databaseService.updateEmail(email);
+          alert("Email sent successfully!");
         }).catch(error => {
           console.error('Error sending email:', error);
         });

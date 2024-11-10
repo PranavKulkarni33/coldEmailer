@@ -13,7 +13,7 @@ import { UserData } from '../Interfaces/user-data';
 export class AuthService {
   private currentUserIdSubject = new BehaviorSubject<string | null>(null);
   private clientId = '312161759808-qmoec815olm5cii2ofi7bmv3ohte9bok.apps.googleusercontent.com';
-  private redirectUri = 'http://localhost:4200/dashboard';
+  private redirectUri = 'https://coldemailer-8a82d.web.app/dashboard';
 
   constructor(private fireauth: AngularFireAuth, private router: Router, private firestore: AngularFirestore) {
     this.fireauth.authState.subscribe(user => {
