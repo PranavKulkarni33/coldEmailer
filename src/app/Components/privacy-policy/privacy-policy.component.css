@@ -1,0 +1,6 @@
+.privacy-policy-container {
+    max-height: 800px; /* Set a max-height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 15px;
+    border: 1px solid #ccc; /* Optional: Add a border */
+}
