@@ -8,29 +8,33 @@ import { AuthService } from 'src/app/Services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  username : string = '';
-  password : string = '';
+  name: string = '';
+  username: string = '';
+  password: string = '';
 
-  constructor( private auth : AuthService,
-    private router: Router){}
+  constructor(private auth: AuthService, private router: Router) {}
 
-
-  signup(){
-    if(this.username == '' ){
+  signup() {
+    if (this.name === '') {
+      alert('Please fill in your Name');
+      return;
+    }
+    if (this.username === '') {
       alert('Please fill in the Username');
       return;
     }
-    if(this.password == '' ){
+    if (this.password === '') {
       alert('Please fill in the Password');
       return;
     }
 
-    this.auth.signup(this.username,this.password);
-    this.username= '';
-    this.password= '';
+    this.auth.signup(this.name, this.username, this.password);
+    this.name = '';
+    this.username = '';
+    this.password = '';
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['/login']);
   }
 }

@@ -11,13 +11,15 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailService } from './Services/email.service';
+import { PrivacyPolicyComponent } from './Components/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

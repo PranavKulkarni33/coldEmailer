@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   isEditMode = false;
   appliedFilter: { type: string, value?: any } | null = null;
   userEmail: string | null = null;
+  userName: string | null = null;
   clientId = '312161759808-qmoec815olm5cii2ofi7bmv3ohte9bok.apps.googleusercontent.com';
   redirectUri = 'http://localhost:4200/dashboard';
 
@@ -37,7 +38,21 @@ export class DashboardComponent implements OnInit {
     this.loadUserEmail();
     this.loadUserEmails();
     this.processOAuthRedirect();
+    this.loadUserName();
+
   }
+
+  private loadUserName(): void {
+    this.authService.getUserName().subscribe(name => {
+      this.userName = name;
+      if (this.userName) {
+        console.log('Logged-in user name:', this.userName);
+      } else {
+        console.log('User name is null or undefined.');
+      }
+    });
+  }
+  
 
   // Load the logged-in user's email
   private loadUserEmail(): void {
@@ -140,24 +155,23 @@ saveEmail(): void {
       if (accessToken) {
         const { email: recipientEmail, company, jobTitle } = email;
   
-        // Compose the email subject and body
         const subject = `Job Opportunity at ${company}`;
-        const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\n${this.userEmail}`;
+        const body = `Dear ${company} team,\n\nI am interested in the ${jobTitle} position at ${company}. Looking forward to the opportunity to connect.\n\nBest regards,\n${this.userName || 'Your Name'}`;
   
-        // Send the email
         this.emailService.sendEmail(accessToken, this.userEmail!, recipientEmail, subject, body).then(() => {
           console.log(`Email sent to ${recipientEmail}`);
-          email.status = 'sent'; // Update the status to sent
-          this.databaseService.updateEmail(email); // Update in database
+          email.status = 'sent';
+          this.databaseService.updateEmail(email);
         }).catch(error => {
           console.error('Error sending email:', error);
         });
       } else {
         console.error('No access token found, please authenticate.');
-        this.startOAuthFlow(); // Initiates OAuth flow if no token is available
+        this.startOAuthFlow();
       }
     });
   }
+  
   
 
   
